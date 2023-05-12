@@ -1,0 +1,18 @@
+{
+    "typescript.disableAutomaticTypeAcquisition": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "packages/forcemula/lib":false,
+        "lib":true,
+        "**/[^forcemula|^sfdc-soup]*/lib":true,
+    },
+    "files.associations": {
+        "*.log": "vt100"
+    },
+    "editor.tabSize": 2
+}
