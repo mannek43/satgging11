@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout Repository test Branch
+      - name: Checkout Repository stagging Branch
         id: checkout
         uses: actions/checkout@v3
         with:
-          ref: test
+          ref: stagging
           
       - name: Get changed files
         id: changed-files
