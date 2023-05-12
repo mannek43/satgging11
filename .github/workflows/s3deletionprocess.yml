@@ -2,7 +2,7 @@ name: uploading s3 bucket deelte files
 
 on: 
   push:
-    branches: stagging # Need to delete (changing main branch for testing)
+    branches: test # Need to delete (changing main branch for testing)
 
 jobs:
   upload:
