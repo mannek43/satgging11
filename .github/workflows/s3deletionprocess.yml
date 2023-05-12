@@ -1,0 +1,42 @@
+name: uploading s3 bucket deelte files
+
+on: 
+  push:
+    branches: txt # Need to delete (changing main branch for testing)
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Repository test Branch
+        id: checkout
+        uses: actions/checkout@v3
+        with:
+          ref: test
+          
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35        
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'eu-west-1'
+          
+      - name: get the list of deleted files
+        shell: bash
+        run: |
+          pwd
+          ls
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch
+          echo $GITHUB_SHA
+          git show --pretty="format:" --name-only $GITHUB_SHA --diff-filter=D -1 > deletedfiles
+          cat deletedfiles
+          BUCKET_NAME=testinggithub
+          while read -r FILENAME; do
+          aws s3 rm "s3://${BUCKET_NAME}/${FILENAME}"
+          done < deletedfiles
