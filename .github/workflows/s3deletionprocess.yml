@@ -2,18 +2,18 @@ name: uploading s3 bucket deelte files
 
 on: 
   push:
-    branches: test # Need to delete (changing main branch for testing)
+    branches: stagging # Need to delete (changing main branch for testing)
 
 jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout Repository test Branch
+      - name: Checkout Repository stagging Branch
         id: checkout
         uses: actions/checkout@v3
         with:
-          ref: test
+          ref: stagging
           
       - name: Get changed files
         id: changed-files
